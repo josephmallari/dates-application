@@ -4,15 +4,18 @@ import json from "./time_slots.json";
 import "./App.css";
 
 function App() {
-  const [chosenIndex, setChosenIndex] = useState();
-  const [clearedIndex, setClearedIndex] = useState();
+  const [chosenIndexes, setChosenIndex] = useState([]);
+  const [indexToRemove, setIndexToRemove] = useState();
 
   function setIndex(index) {
-    setChosenIndex(index);
+    setChosenIndex((prevState) => [...prevState, index]);
   }
 
-  function clearIndex(index) {
-    setClearedIndex(index);
+  function removeIndex(index) {
+    const indexToRemove = chosenIndexes.indexOf(index);
+    chosenIndexes.splice(indexToRemove, 1);
+    setChosenIndex(chosenIndexes);
+    setIndexToRemove(index);
   }
 
   const timeslotsContainer = json.map((timeslotData, i) => {
@@ -20,10 +23,10 @@ function App() {
       <TimeSlotContainer
         key={i}
         setIndex={setIndex}
-        clearIndex={clearIndex}
-        chosenIndex={chosenIndex}
-        clearedIndex={clearedIndex}
+        chosenIndexes={chosenIndexes}
         timeslotData={timeslotData}
+        removeIndex={removeIndex}
+        indexToRemove={indexToRemove}
       />
     );
   });

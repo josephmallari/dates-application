@@ -51,7 +51,7 @@ export default function TimeSlotContainer(props) {
   // clear/reset selected time
   function clearTime() {
     setChosenTime(null);
-    props.clearIndex(selectedIndex);
+    props.removeIndex(selectedIndex);
   }
 
   const timeslots = props.timeslotData.time_slots
@@ -65,8 +65,8 @@ export default function TimeSlotContainer(props) {
         timeslot={timeslot}
         selectTime={selectTime}
         index={j}
-        chosenIndex={props.chosenIndex}
-        clearedIndex={props.clearedIndex}
+        chosenIndexes={props.chosenIndexes}
+        indexToRemove={props.indexToRemove}
       />
     ));
 

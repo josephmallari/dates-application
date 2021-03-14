@@ -33,13 +33,11 @@ export default function TimeSlots(props) {
   let dayMarkup = days[day - 1];
 
   useEffect(() => {
-    // block times of bookings of the same time
-    if (props.chosenIndex === props.index) {
+    if (props.chosenIndexes.includes(props.index)) {
       timeRef.current.classList.add("indexChosen");
     }
 
-    // reset blocked out times
-    if (props.clearedIndex && props.clearedIndex === props.index) {
+    if (props.indexToRemove === props.index) {
       timeRef.current.classList.remove("indexChosen");
     }
   });
