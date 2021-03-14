@@ -5,7 +5,6 @@ import "./App.css";
 
 function App() {
   const [chosenIndexes, setChosenIndex] = useState([]);
-  const [indexToRemove, setIndexToRemove] = useState();
 
   function setIndex(index) {
     setChosenIndex((prevState) => [...prevState, index]);
@@ -13,9 +12,9 @@ function App() {
 
   function removeIndex(index) {
     const indexToRemove = chosenIndexes.indexOf(index);
+
     chosenIndexes.splice(indexToRemove, 1);
-    setChosenIndex(chosenIndexes);
-    setIndexToRemove(index);
+    setChosenIndex(() => [...chosenIndexes]);
   }
 
   const timeslotsContainer = json.map((timeslotData, i) => {
@@ -26,7 +25,6 @@ function App() {
         chosenIndexes={chosenIndexes}
         timeslotData={timeslotData}
         removeIndex={removeIndex}
-        indexToRemove={indexToRemove}
       />
     );
   });

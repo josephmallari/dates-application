@@ -35,9 +35,7 @@ export default function TimeSlots(props) {
   useEffect(() => {
     if (props.chosenIndexes.includes(props.index)) {
       timeRef.current.classList.add("indexChosen");
-    }
-
-    if (props.indexToRemove === props.index) {
+    } else {
       timeRef.current.classList.remove("indexChosen");
     }
   });
