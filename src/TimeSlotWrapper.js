@@ -1,36 +1,42 @@
 import React, { useState, useEffect, useRef } from "react";
-import moment from "moment";
+import TimeSlots from "./TimeSlots";
 
-export default function Example(props) {
-  // Declare a new state variable, which we'll call "count"
-  // const [count, setCount] = useState(0);
-  // const [time, setTime] = useState();
-  const timeRef = useRef();
-  const day = moment(props.timeslot.start_time.split("T")[0]).day();
+export default function TimeSlotWrapper(props) {
+  const [chosenTime, setChosenTime] = useState();
+  const [selectedIndex, setSelectedIndex] = useState();
 
-  const days = [
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday",
-    "Sunday",
-  ];
+  const timeslots = props.timeslotData.time_slots
+    .sort((a, b) => {
+      return a.date < b.date ? -1 : a.date > b.date ? 1 : 0;
+    })
+    .map((timeslot, j) => (
+      <TimeSlots
+        key={j}
+        timeslot={timeslot}
+        selectTime={selectTime}
+        index={j}
+        chosenIndex={props.chosenIndex}
+        clearedIndex={props.clearedIndex}
+      />
+    ));
 
-  function selectTime() {
-    console.log("select time");
-    // setTime("time selected");
-    console.log(timeRef.current);
+  function selectTime(time, index) {
+    setChosenTime(time);
+    setSelectedIndex(index);
+    props.setIndex(index);
+  }
+
+  function clearTime() {
+    setChosenTime(null);
+    props.clearIndex(selectedIndex);
   }
 
   return (
-    <div key={props.index}>
-      <div>{days[day - 1]}</div>
-      <div onClick={selectTime} ref={timeRef}>
-        {moment.utc(props.timeslot.start_time).format("HH:mm")} -{" "}
-        {moment.utc(props.timeslot.end_time).format("HH:mm")}
-      </div>
+    <div className="timeslotWrapper">
+      <div>{props.timeslotData.name}</div>
+      <div>chosen time: {chosenTime}</div>
+      <div onClick={clearTime}>clear time</div>
+      {timeslots}
     </div>
   );
 }

@@ -11,3 +11,7 @@
 .day-num-5 ~ .day-num-5 .day-text {
   display: none;
 }
+
+.index-chosen {
+  color: blue;
+}

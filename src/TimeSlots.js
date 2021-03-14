@@ -1,10 +1,7 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useRef, useEffect } from "react";
 import moment from "moment";
 
 export default function TimeSlots(props) {
-  // Declare a new state variable, which we'll call "count"
-  // const [count, setCount] = useState(0);
-  // const [time, setTime] = useState();
   const day = moment(props.timeslot.start_time.split("T")[0]).day();
   const timeRef = useRef();
 
@@ -18,17 +15,27 @@ export default function TimeSlots(props) {
     "Sunday",
   ];
 
-  function selectTime() {
-    // setTime("time selected");
-    console.log(timeRef.current.textContent);
-  }
+  useEffect(() => {
+    if (props.chosenIndex === props.index) {
+      timeRef.current.classList.add("index-chosen");
+    }
+
+    if (props.clearedIndex && props.clearedIndex == props.index) {
+      timeRef.current.classList.remove("index-chosen");
+    }
+  });
 
   let dayMarkup = days[day - 1];
 
   return (
-    <div key={props.index} className={`day-num-${day}`}>
+    <div className={`day-num-${day}`}>
       <div className="day-text">{dayMarkup}</div>
-      <div onClick={selectTime} ref={timeRef}>
+      <div
+        onClick={() =>
+          props.selectTime(timeRef.current.textContent, props.index)
+        }
+        ref={timeRef}
+      >
         {moment.utc(props.timeslot.start_time).format("HH:mm")} -{" "}
         {moment.utc(props.timeslot.end_time).format("HH:mm")}
       </div>

@@ -1,31 +1,30 @@
-import json from "./time_slots.json";
-import Timeslots from "./TimeSlots";
+import TimeSlotWrapper from "./TimeSlotWrapper";
 import { useState } from "react";
+import json from "./time_slots.json";
 import "./App.css";
 
 function App() {
-  const [daysArr, setDaysArr] = useState([]);
+  const [chosenIndex, setChosenIndex] = useState();
+  const [clearedIndex, setClearedIndex] = useState();
 
-  const markup = json.map((x, i) => {
-    const timeslots = x.time_slots
-      .sort((a, b) => {
-        return a.date < b.date ? -1 : a.date > b.date ? 1 : 0;
-      })
-      .map((timeslot, j) => (
-        <Timeslots
-          key={j}
-          timeslot={timeslot}
-          daysArr={daysArr}
-          setDaysArr={setDaysArr}
-        />
-      ));
+  function setIndex(index) {
+    setChosenIndex(index);
+  }
 
+  function clearIndex(index) {
+    setClearedIndex(index);
+  }
+
+  const timeslotsWrapper = json.map((timeslotData, i) => {
     return (
-      <div key={i}>
-        <div>{x.name}</div>
-        <div>chosen time:</div>
-        {timeslots}
-      </div>
+      <TimeSlotWrapper
+        timeslotData={timeslotData}
+        key={i}
+        setIndex={setIndex}
+        chosenIndex={chosenIndex}
+        clearIndex={clearIndex}
+        clearedIndex={clearedIndex}
+      />
     );
   });
 
@@ -34,7 +33,7 @@ function App() {
       className="App"
       style={{ display: "flex", justifyContent: "space-around" }}
     >
-      {markup}
+      {timeslotsWrapper}
     </div>
   );
 }
