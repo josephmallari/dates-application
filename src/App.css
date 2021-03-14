@@ -1,17 +1,30 @@
-.day-num-1 .day-text,
-.day-num-2 .day-text,
-.day-num-4 .day-text,
-.day-num-5 .day-text {
+.App {
+  display: flex;
+  justify-content: center;
+  padding: 25px 100px;
+}
+
+.dayNum1 .dayText,
+.dayNum2 .dayText,
+.dayNum4 .dayText,
+.dayNum5 .dayText {
   display: block;
 }
 
-.day-num-1 ~ .day-num-1 .day-text,
-.day-num-2 ~ .day-num-2 .day-text,
-.day-num-4 ~ .day-num-4 .day-text,
-.day-num-5 ~ .day-num-5 .day-text {
+.dayNum1 ~ .dayNum1 .dayText,
+.dayNum2 ~ .dayNum2 .dayText,
+.dayNum4 ~ .dayNum4 .dayText,
+.dayNum5 ~ .dayNum5 .dayText {
   display: none;
 }
 
-.index-chosen {
-  color: blue;
+.indexChosen {
+  opacity: 0.3;
+}
+
+.chosenTime {
+  width: 350px;
+  height: 30px;
+  line-height: 30px;
+  display: block;
 }

@@ -1,4 +1,4 @@
-import TimeSlotWrapper from "./TimeSlotWrapper";
+import TimeSlotContainer from "./TimeSlotContainer";
 import { useState } from "react";
 import json from "./time_slots.json";
 import "./App.css";
@@ -15,27 +15,20 @@ function App() {
     setClearedIndex(index);
   }
 
-  const timeslotsWrapper = json.map((timeslotData, i) => {
+  const timeslotsContainer = json.map((timeslotData, i) => {
     return (
-      <TimeSlotWrapper
-        timeslotData={timeslotData}
+      <TimeSlotContainer
         key={i}
         setIndex={setIndex}
-        chosenIndex={chosenIndex}
         clearIndex={clearIndex}
+        chosenIndex={chosenIndex}
         clearedIndex={clearedIndex}
+        timeslotData={timeslotData}
       />
     );
   });
 
-  return (
-    <div
-      className="App"
-      style={{ display: "flex", justifyContent: "space-around" }}
-    >
-      {timeslotsWrapper}
-    </div>
-  );
+  return <div className="App">{timeslotsContainer}</div>;
 }
 
 export default App;

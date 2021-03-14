@@ -1,5 +1,20 @@
 import React, { useRef, useEffect } from "react";
 import moment from "moment";
+import styled from "styled-components";
+
+const Button = styled.button`
+  color: green;
+  cursor: pointer;
+  padding: 10px;
+  border: 1px solid green;
+  background: none;
+  margin-bottom: 5px;
+  font-size: 15px;
+`;
+
+const DayText = styled.h4`
+  margin-bottom: 10px;
+`;
 
 export default function TimeSlots(props) {
   const day = moment(props.timeslot.start_time.split("T")[0]).day();
@@ -15,22 +30,26 @@ export default function TimeSlots(props) {
     "Sunday",
   ];
 
+  let dayMarkup = days[day - 1];
+
   useEffect(() => {
+    // block times of bookings of the same time
     if (props.chosenIndex === props.index) {
-      timeRef.current.classList.add("index-chosen");
+      timeRef.current.classList.add("indexChosen");
     }
 
-    if (props.clearedIndex && props.clearedIndex == props.index) {
-      timeRef.current.classList.remove("index-chosen");
+    // reset blocked out times
+    if (props.clearedIndex && props.clearedIndex === props.index) {
+      timeRef.current.classList.remove("indexChosen");
     }
   });
 
-  let dayMarkup = days[day - 1];
-
   return (
-    <div className={`day-num-${day}`}>
-      <div className="day-text">{dayMarkup}</div>
-      <div
+    <div className={`dayNum${day}`}>
+      <DayText className="dayText">
+        {dayMarkup} {props.timeslot.start_time.split("T")[0]}
+      </DayText>
+      <Button
         onClick={() =>
           props.selectTime(timeRef.current.textContent, props.index)
         }
@@ -38,7 +57,7 @@ export default function TimeSlots(props) {
       >
         {moment.utc(props.timeslot.start_time).format("HH:mm")} -{" "}
         {moment.utc(props.timeslot.end_time).format("HH:mm")}
-      </div>
+      </Button>
     </div>
   );
 }
