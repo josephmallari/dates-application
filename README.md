@@ -33,5 +33,6 @@ Given more time, I would have added unit testing. Mainly the funcionality behind
 npm i
 npm start
 ```
+Go to http://localhost:3000/ 
 
 Pick some times!
