@@ -9,7 +9,7 @@ simply passed as props.
 For CSS. I used styled components. I think the styled components worked well for this project. There is some CSS also used on the global scope.
 
 ## Other packages:
-- moment
+- moment:
   I used moment to manage time and date. It manages ISO format pretty nicely so it was simple to output data.
   
 Potential improvements
