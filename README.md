@@ -24,7 +24,10 @@ Animations
 I would have added some sort of animation given more time. I think that an application like this would have welcomed some sort of animation.
 
 Testing
-Given more time, I would have added unit testing. Mainly the funcionality behind adding a selected time and blocking out times that are selected.t
+Given more time, I would have added unit testing. Mainly the funcionality behind adding a selected time and blocking out times that are selected.
+
+Best Practices
+Since on my current employment we don't use React, and I've been working with other programming languages. I am slighly out of the loop when it comes to the newest most updated features and best practices of React if I missed any. Knowing that the library evolves and updates quite fast!
   
 ## Setup and installation
 
